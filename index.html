@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(45deg, #ffffa0, #ffd54d); /* Pastel yellow background with orange stripes */
+        }
+
+        #container {
+            text-align: center;
+        }
+
+        #image {
+            width: 90%; /* Adjust this to change the size of the image */
+            max-width: 400px; /* This will ensure the image is not too big on large screens */
+            border-radius: 10px; /* Add a slight border-radius for a softer look */
+            transition: opacity 0.5s ease; /* Add transition for opacity */
+        }
+
+        #message {
+            font-size: 24px;
+            transition: opacity 0.5s ease; /* Add transition for opacity */
+        }
+
+        #yesButton {
+            font-size: 24px;
+            background-color: #4caf50; /* Green button color */
+            color: #fff; /* White text color */
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px; /* Add a border-radius for a rounded button */
+        }
+
+        #noButton {
+            font-size: 24px;
+            background-color: #f44336; /* Red button color */
+            color: #fff; /* White text color */
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px; /* Add a border-radius for a rounded button */
+        }
+    </style>
+    <script>
+        let noClickCount = 0;
+        let greenButtonSize = 24; // Initial size of the green button
+        const noMessages = ["Are you sure?", "Really sure?", "Absolutely sure?", "WHYYYYYYYY?!!!??", "Please reconsider...", "POOKIE PLEASE", "DON'T DO THIS TO ME!", "PLEASE POOKIEEEE PLEASE"];
+
+        function noClick() {
+            // Adjust the size of the green button
+            greenButtonSize += 10;
+            document.getElementById('yesButton').style.fontSize = greenButtonSize + 'px';
+
+            if (noClickCount < noMessages.length - 1) {
+                document.getElementById('noButton').innerText = noMessages[noClickCount];
+            } else {
+                // Cycle back through the messages
+                noClickCount = 0;
+                document.getElementById('noButton').innerText = noMessages[noClickCount];
+            }
+
+            noClickCount++;
+        }
+
+function yesClick() {
+    // Add fade-out animation to image and message
+    document.getElementById('image').style.opacity = 0;
+    document.getElementById('message').style.opacity = 0;
+
+    // Wait for animation to finish before changing content and showing message
+    setTimeout(() => {
+        // Replace the image source after the animation
+        document.getElementById('image').src = 'yay.jpg'; // replace with your yay image path
+
+        // Display the message
+        document.getElementById('message').innerHTML = `<div style="border: 2px solid black; padding: 10px;">
+            Shasmeen, I know I said I wouldn’t because I’m already doing something for you, but I thought about it a lot. About how you always wanted a rose and have never been with someone on Valentine's. It made me realize you are right. This is our final year of school, and I cannot believe I nearly did not get you the rose. I had this entire thing planned. Remember me scrambling to see the rose on Thursday, that was because you missed mine and I thought you had it. These past few months have been absolutely wonderful. Something I could not even fathom could one day be mine. I am so so so glad I get to have you as my valentine. (Who would have thought 5 months ago – Maaz and Shaz :)<br><br>
+            <span style="display: block; border-top: 2px solid black; padding-top: 10px;">I Love You</span>
+        </div>`;
+
+        // Show the image and message
+        document.getElementById('image').style.opacity = 1;
+        document.getElementById('message').style.opacity = 1;
+
+        // Hide the buttons
+        document.getElementById('yesButton').style.display = 'none';
+        document.getElementById('noButton').style.display = 'none';
+    }, 500); // Adjust the delay as needed, this is in milliseconds (500ms = 0.5s)
+}
+
+    </script>
+</head>
+<body>
+    <div id="container">
+        <img id="image" src="valentine.png" alt="Will you be my Valentine?"> <!-- replace with your valentine image path -->
+        <p id="message">Will you be my Valentine?</p>
+        <button id="yesButton" onclick="yesClick()">Yes</button>
+        <button id="noButton" onclick="noClick()">No</button>
+    </div>
+</body>
+</html>
